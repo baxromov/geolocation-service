@@ -35,8 +35,8 @@ async def consume():
                 host=DATABASE.get('db').get('host'),
                 port=DATABASE.get('db').get('port')
             )
-            query = f"insert into geolocation (latitude, longitude, address) " \
-                    f"values ({location_model.latitude}, {location_model.longitude}, '{location_model.address}')"
+            query = f"insert into geolocation (latitude, longitude, address, guid) " \
+                    f"values ({location_model.latitude}, {location_model.longitude}, '{location_model.address}', '{location_model.guid}')"
             cursor = connection.cursor()
             cursor.execute(query)
             connection.commit()

@@ -8,5 +8,6 @@ class LocationModelProducer(BaseModel):
     latitude: StrictFloat
     longitude: StrictFloat
     address: StrictStr
+    guid: StrictStr
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
