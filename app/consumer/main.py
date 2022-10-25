@@ -5,8 +5,8 @@ import psycopg2
 from aiokafka import AIOKafkaConsumer
 from fastapi import FastAPI
 
-from app.config.settings import DATABASE, get_settings
-from app.models.geolocation import LocationModelProducer
+from config.settings import DATABASE, get_settings
+from models.geolocation import LocationModelProducer
 
 log = logging.getLogger("uvicorn")
 
@@ -57,3 +57,8 @@ async def shutdown_event():
 
     log.info("Shutting down...")
     await consumer.stop()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello world!!!"}
