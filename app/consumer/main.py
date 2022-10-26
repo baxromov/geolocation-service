@@ -57,8 +57,3 @@ async def shutdown_event():
 
     log.info("Shutting down...")
     await consumer.stop()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello world!!!"}

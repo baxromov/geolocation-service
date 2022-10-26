@@ -47,3 +47,20 @@ services:
     depends_on:
       - broker
       - zookeeper
+
+  api:
+    container_name: api
+    build:
+      context: app/api
+      dockerfile: Dockerfile
+    command: uvicorn main:app --reload --workers 2 --host 0.0.0.0 --port 5000
+    ports:
+    - 5000:5000
+    volumes:
+      - ./app/api:/api
+    environment:
+      - DB=defaultdb
+      - DB_USERNAME=doadmin
+      - DB_PASSWORD=AVNS_hwAhxIrLgLdojpe88iP
+      - DB_HOST=geolocation-service-db-do-user-9540197-0.b.db.ondigitalocean.com
+      - DB_PORT=25060
