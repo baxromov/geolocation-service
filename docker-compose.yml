@@ -24,6 +24,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: "geolocation_service"
 
   geolocation-service:
     container_name: geolocation-service
@@ -45,8 +46,8 @@ services:
       - DB_HOST=geolocation-service-db-do-user-9540197-0.b.db.ondigitalocean.com
       - DB_PORT=25060
     depends_on:
-      - broker
       - zookeeper
+      - broker
 
   api:
     container_name: api
@@ -55,7 +56,7 @@ services:
       dockerfile: Dockerfile
     command: uvicorn main:app --reload --workers 2 --host 0.0.0.0 --port 5000
     ports:
-    - 5000:5000
+      - 5000:5000
     volumes:
       - ./app/api:/api
     environment:
@@ -64,3 +65,5 @@ services:
       - DB_PASSWORD=AVNS_hwAhxIrLgLdojpe88iP
       - DB_HOST=geolocation-service-db-do-user-9540197-0.b.db.ondigitalocean.com
       - DB_PORT=25060
+    depends_on:
+      - geolocation-service
